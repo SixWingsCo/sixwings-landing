@@ -1,84 +1,499 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>SixWings Advisory</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content="SixWings — Delivery, Operations & Digital Execution for NetSuite / SuiteCommerce and modern teams."/>
+  <title>SixWings</title>
 
-<style>
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    margin: 0;
-    background:#f7f7f7;
-    color:#222;
-}
+  <!-- Free fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
-.container {
-    max-width:800px;
-    margin:auto;
-    padding:60px 20px;
-}
+  <style>
+    :root{
+      --bg: #0b1220;
+      --panel: rgba(255,255,255,0.06);
+      --panel2: rgba(255,255,255,0.04);
+      --border: rgba(255,255,255,0.10);
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.70);
+      --muted2: rgba(255,255,255,0.55);
+      --accent: #46d6c8;
+      --accent2: #7aa7ff;
+      --shadow: 0 20px 60px rgba(0,0,0,.35);
+      --radius: 18px;
+      --max: 1120px;
+    }
 
-h1 {
-    font-size:40px;
-    margin-bottom:10px;
-}
+    *{ box-sizing: border-box; }
+    html,body{ height: 100%; }
+    body{
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(900px 500px at 20% -10%, rgba(70,214,200,0.30), transparent 60%),
+        radial-gradient(900px 500px at 90% 0%, rgba(122,167,255,0.25), transparent 55%),
+        radial-gradient(900px 700px at 50% 120%, rgba(70,214,200,0.12), transparent 60%),
+        var(--bg);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      line-height: 1.5;
+    }
 
-h2 {
-    margin-top:40px;
-}
+    a{ color: inherit; text-decoration: none; }
+    .wrap{ max-width: var(--max); margin: 0 auto; padding: 26px 18px 64px; }
 
-p {
-    line-height:1.6;
-}
+    /* Top bar */
+    header{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 16px;
+      background: rgba(0,0,0,0.10);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      backdrop-filter: blur(10px);
+    }
 
-.contact {
-    margin-top:40px;
-    padding:20px;
-    background:#fff;
-    border-radius:8px;
-}
-</style>
+    .brand{
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 240px;
+    }
+
+    .logo{
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+    .logo img{
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .brand-title{
+      font-family: "Space Grotesk", Inter, sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      font-size: 18px;
+      line-height: 1.1;
+    }
+    .brand-sub{
+      font-size: 12.5px;
+      color: var(--muted2);
+      margin-top: 2px;
+    }
+
+    nav{
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    nav a{
+      color: var(--muted);
+      font-size: 14px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+    }
+    nav a:hover{
+      color: var(--text);
+      border-color: rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .btn{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      font-weight: 600;
+      font-size: 14px;
+      transition: transform .08s ease, background .2s ease, border-color .2s ease;
+    }
+    .btn:hover{
+      background: rgba(255,255,255,0.10);
+      border-color: rgba(255,255,255,0.18);
+      transform: translateY(-1px);
+    }
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(70,214,200,0.95), rgba(122,167,255,0.90));
+      border-color: rgba(255,255,255,0.18);
+      color: #071019;
+    }
+    .btn.primary:hover{
+      transform: translateY(-1px);
+      filter: brightness(1.03);
+    }
+
+    /* Hero */
+    .hero{
+      margin-top: 22px;
+      padding: 42px 22px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03));
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(600px 240px at 20% 15%, rgba(70,214,200,.18), transparent 55%),
+        radial-gradient(520px 220px at 82% 35%, rgba(122,167,255,.16), transparent 55%);
+      pointer-events:none;
+    }
+    .hero-grid{
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 18px;
+      align-items: center;
+    }
+
+    h1{
+      margin: 0 0 12px;
+      font-family: "Space Grotesk", Inter, sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      font-size: clamp(34px, 4.2vw, 54px);
+    }
+    .lead{
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 60ch;
+    }
+    .hero-actions{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items:center;
+      margin-top: 14px;
+    }
+    .pillrow{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+    .pill{
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.20);
+      border: 1px solid rgba(255,255,255,0.10);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .card{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.18);
+      padding: 18px;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.22);
+    }
+    .kpis{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .kpi{
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+    }
+    .kpi .t{
+      font-family: "Space Grotesk", Inter, sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      font-size: 16px;
+    }
+    .kpi .d{
+      margin-top: 3px;
+      color: var(--muted2);
+      font-size: 13px;
+    }
+
+    /* Sections */
+    section{ margin-top: 22px; }
+    .grid-3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .grid-2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .section-title{
+      font-family: "Space Grotesk", Inter, sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      font-size: 18px;
+      margin: 0 0 10px;
+    }
+    .muted{ color: var(--muted); margin: 0; }
+
+    .item-title{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      font-family: "Space Grotesk", Inter, sans-serif;
+    }
+    .tag{
+      font-size: 12px;
+      color: rgba(0,0,0,0.85);
+      background: linear-gradient(135deg, rgba(70,214,200,0.95), rgba(122,167,255,0.90));
+      padding: 5px 10px;
+      border-radius: 999px;
+    }
+    ul{
+      margin: 10px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+    li{ margin: 6px 0; }
+
+    /* CTA */
+    .cta{
+      margin-top: 22px;
+      padding: 22px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,0.14);
+      background: linear-gradient(135deg, rgba(70,214,200,0.10), rgba(122,167,255,0.10));
+      display:flex;
+      gap: 16px;
+      align-items:center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    .cta p{ margin: 0; color: var(--muted); }
+    .cta strong{ color: var(--text); }
+
+    /* Footer */
+    footer{
+      margin-top: 26px;
+      color: var(--muted2);
+      font-size: 13px;
+      display:flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding: 0 4px;
+    }
+    .fine a{ color: var(--muted); border-bottom: 1px solid rgba(255,255,255,0.18); }
+    .fine a:hover{ color: var(--text); }
+
+    /* Responsive */
+    @media (max-width: 900px){
+      .hero-grid{ grid-template-columns: 1fr; }
+      .grid-3{ grid-template-columns: 1fr; }
+      .grid-2{ grid-template-columns: 1fr; }
+      header{ border-radius: 18px; }
+      .brand{ min-width: unset; }
+    }
+  </style>
 </head>
 
 <body>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="#top" aria-label="SixWings Home">
+        <div class="logo" aria-hidden="true">
+          <img src="assets/sixwings-logo.png" alt="SixWings logo">
+        </div>
+        <div>
+          <div class="brand-title">SixWings</div>
+          <div class="brand-sub">Delivery • Operations • Digital Execution</div>
+        </div>
+      </a>
 
-<div class="container">
+      <nav>
+        <a href="#services">Services</a>
+        <a href="#how">How I work</a>
+        <a href="#about">About</a>
+        <a class="btn" href="https://linkedin.com/in/aruy" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a class="btn primary" href="#contact">Book a call</a>
+      </nav>
+    </header>
 
-<h1>SixWings Advisory</h1>
+    <main id="top">
+      <div class="hero">
+        <div class="hero-grid">
+          <div>
+            <h1>Calm delivery, clear outcomes, and reliable execution.</h1>
+            <p class="lead">
+              SixWings helps teams ship improvements across ERP & commerce programs — with a practical focus on delivery discipline,
+              stakeholder alignment, and measurable results.
+            </p>
 
-<p><strong>Fractional ERP & Operations Advisory</strong></p>
+            <div class="hero-actions">
+              <a class="btn primary" href="#contact">Request availability</a>
+              <a class="btn" href="#services">See services</a>
+            </div>
 
-<p>
-Helping companies stabilize operations, scale delivery,
-and improve ERP implementations.
-</p>
+            <div class="pillrow" aria-label="Highlights">
+              <div class="pill">NetSuite / SuiteCommerce</div>
+              <div class="pill">Service Delivery & Program Leadership</div>
+              <div class="pill">Ops + Process Improvement</div>
+              <div class="pill">EU / LATAM cross-cultural delivery</div>
+            </div>
+          </div>
 
-<h2>Areas of Support</h2>
+          <aside class="card" aria-label="Value card">
+            <div class="kpis">
+              <div class="kpi">
+                <div class="t">Fast diagnosis</div>
+                <div class="d">Quickly identify blockers and propose an execution path.</div>
+              </div>
+              <div class="kpi">
+                <div class="t">Predictable cadence</div>
+                <div class="d">Weekly rhythm, clear priorities, and stakeholder visibility.</div>
+              </div>
+              <div class="kpi">
+                <div class="t">Senior ownership</div>
+                <div class="d">Hands-on leadership from discovery to delivery.</div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
 
-<p>
-• ERP delivery leadership<br>
-• Operational scaling support<br>
-• Delivery stabilization for growing teams<br>
-• Advisory for startups and mid-size companies
-</p>
+      <section id="services">
+        <h2 class="section-title">Services</h2>
+        <p class="muted">Simple packaging to fit your need — advisory, hands-on execution, or interim ownership.</p>
 
-<h2>About</h2>
+        <div class="grid-3" style="margin-top:14px;">
+          <div class="card">
+            <div class="item-title">
+              <span>Delivery Leadership</span>
+              <span class="tag">Core</span>
+            </div>
+            <p class="muted">Run delivery with clarity and low drama.</p>
+            <ul>
+              <li>Roadmap, scope control, and stakeholder alignment</li>
+              <li>Backlog shaping, sprint cadence, release management</li>
+              <li>Risk management and executive-ready status updates</li>
+            </ul>
+          </div>
 
-<p>
-Led by Alejandro Rodriguez Danzov, SixWings Advisory supports
-organizations facing operational growth challenges,
-ERP complexity, or delivery scaling issues.
-</p>
+          <div class="card">
+            <div class="item-title">
+              <span>NetSuite / SuiteCommerce Ops</span>
+              <span class="tag">ERP</span>
+            </div>
+            <p class="muted">Improve reliability across support and change.</p>
+            <ul>
+              <li>Incident patterns, root cause routines, deflection</li>
+              <li>Governance for enhancements & environment strategy</li>
+              <li>Documentation upgrades and handover readiness</li>
+            </ul>
+          </div>
 
-<div class="contact">
-<strong>Contact</strong><br><br>
+          <div class="card">
+            <div class="item-title">
+              <span>Delivery System Setup</span>
+              <span class="tag">Scale</span>
+            </div>
+            <p class="muted">Make execution repeatable.</p>
+            <ul>
+              <li>Operating model, ceremonies, templates</li>
+              <li>Metrics: throughput, lead time, reliability</li>
+              <li>Client communication standards (simple, consistent)</li>
+            </ul>
+          </div>
+        </div>
+      </section>
 
-Email: contact@sixwingsco.com<br>
-LinkedIn: https://linkedin.com/in/alejandro-rodriguez-danzov
-</div>
+      <section id="how">
+        <h2 class="section-title">How I work</h2>
 
-</div>
+        <div class="grid-2" style="margin-top:14px;">
+          <div class="card">
+            <div class="item-title"><span>1) Diagnose</span><span class="tag">Week 1</span></div>
+            <p class="muted">A short assessment to identify the real constraints and the fastest path to results.</p>
+            <ul>
+              <li>Objectives, stakeholders, current blockers</li>
+              <li>Delivery health check + risk register</li>
+              <li>90-day plan proposal</li>
+            </ul>
+          </div>
 
+          <div class="card">
+            <div class="item-title"><span>2) Execute</span><span class="tag">Ongoing</span></div>
+            <p class="muted">Weekly rhythm, consistent communication, predictable outcomes.</p>
+            <ul>
+              <li>Weekly status snapshot (what changed, what’s next, risks)</li>
+              <li>Scope management and expectation alignment</li>
+              <li>Delivery artifacts that don’t create overhead</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="about">
+        <h2 class="section-title">About</h2>
+        <div class="card">
+          <p class="muted" style="margin:0;">
+            I’m a senior delivery leader focused on cross-functional execution, client management, and operational discipline.
+            Experience working with startups through enterprise clients across multiple regions and cultures.
+          </p>
+        </div>
+      </section>
+
+      <section id="contact" class="cta" aria-label="Contact">
+        <div>
+          <div class="section-title" style="margin:0 0 6px;">Let’s talk.</div>
+          <p>
+            <strong>Fast first step:</strong> send your context + goal, and I’ll reply with next steps and availability.
+          </p>
+        </div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <!-- Replace the email below if you have a preferred one -->
+          <a class="btn primary" href="mailto:contact@sixwingsco.com?subject=SixWings%20-%20Intro%20Call&body=Hi%20Ale,%0A%0AContext:%20%0AGoal:%20%0ATimeline:%20%0A%0AThanks,">Email</a>
+          <a class="btn" href="https://linkedin.com/in/aruy" target="_blank" rel="noreferrer">Message on LinkedIn</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="fine">
+      <div>© <span id="y"></span> SixWings</div>
+      <div>
+        <a href="https://linkedin.com/in/aruy" target="_blank" rel="noreferrer">linkedin.com/in/aruy</a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
